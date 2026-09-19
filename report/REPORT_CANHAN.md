@@ -134,14 +134,16 @@ tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_tr
 
 | Cặp | Câu A | Câu B | Dự đoán | Điểm thực tế | Đúng? |
 |------|-----------|-----------|---------|--------------|-------|
-| 1 | | | cao / thấp | | |
-| 2 | | | cao / thấp | | |
-| 3 | | | cao / thấp | | |
-| 4 | | | cao / thấp | | |
-| 5 | | | cao / thấp | | |
+| 1 | "GPA tối thiểu để duy trì học bổng toàn phần là 3.6/4.0." | "Để không bị cắt học bổng 100%, sinh viên phải giữ điểm tổng kết từ 3.6 trở lên." | cao | 0.89 | Có|
+| 2 | "Mức hỗ trợ của học bổng Vượt Khó là 2.000.000 VNĐ mỗi tháng." | "Hạn chót nộp hồ sơ xin xác nhận vay vốn ngân hàng là ngày 15/10." | thấp | 0.58 | Không|
+| 3 | "Học bổng Khuyến khích học tập dành cho sinh viên năm nhất." | "Học bổng Khuyến khích học tập không dành cho sinh viên năm nhất." | cao | 0.93 | Có |
+| 4 | "Sinh viên thuộc diện hộ nghèo sẽ được hỗ trợ toàn bộ học phí." | "Nhà trường miễn 100% học phí cho các bạn có hoàn cảnh đặc biệt khó khăn." | cao | 0.83 | Có |
+| 5 | "Sinh viên vi phạm kỷ luật sẽ bị tước quyền xét học bổng." | "Quyền xét học bổng của sinh viên sẽ bị tước nếu vi phạm kỷ luật." | cao | 0.98 | Có |
 
 **Kết quả nào bất ngờ nhất? Điều này nói gì về cách embeddings biểu diễn ý nghĩa?**
 > *Viết 2-3 câu:*
+> Câu 2: Dù gần như có vẻ không liên quan đến nhau nhưng consine similariity lại khá cao.
+> Câu 3: Không bất ngờ nhưng đáng nói là dù hai câu có ý nghĩa trái ngược nhau hoàn toàn về mặt logic (phủ định bằng từ "không") nhưng điểm Cosine Similarity lại cực kỳ cao. Có thể giải thích bằng việc gần như toàn bộ nộ dung gần giống nhau, hay phản ánh rõ ràng rằng Embedding đang có xu hướng biểu diễn topic hoặc lexical overlap tốt hơn là biểu diễn logic ngữ nghĩa thực tế.
 
 ---
 
@@ -168,9 +170,9 @@ Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân củ
 
 | Tiêu chí | Điểm tự đánh giá |
 |----------|-------------------|
-| Khởi động (Warm-up) | / 5 |
-| Hướng tiếp cận của tôi (My Approach) | / 10 |
-| Hoàn thiện code (Core Implementation — tests) | / 30 |
-| Dự đoán độ tương tự (Similarity Predictions) | / 5 |
+| Khởi động (Warm-up) | 5 / 5 |
+| Hướng tiếp cận của tôi (My Approach) | 9 / 10 |
+| Hoàn thiện code (Core Implementation — tests) | 30 / 30 |
+| Dự đoán độ tương tự (Similarity Predictions) | 4 / 5 |
 | Kết quả truy xuất của tôi (Competition Results) | / 10 |
 | **Tổng phần cá nhân** | **/ 60** |

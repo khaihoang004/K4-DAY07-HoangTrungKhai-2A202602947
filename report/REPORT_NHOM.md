@@ -197,13 +197,17 @@ class MarkdownHeadingChunker:
 ## 4. Thuyết trình (Demo) & Bài học nhóm — Nhóm (5 điểm)
 
 **Những phân tích (insights) hay nhất nhóm sẽ trình bày:**
-> *Liệt kê 2-3 ý:*
+> Điểm Cosine Similarity đo lường sự tương đồng về "chủ đề" và "từ vựng" chứ không đo lường logic. Một câu khẳng định và một câu phủ định hoàn toàn có thể đạt điểm Cosine > 0.9. Do đó, Metadata Filtering là chốt chặn bắt buộc để hệ thống không bị "ảo giác" (hallucinate).
+
+> Thuật toán phân mảnh (Chunking) quyết định trực tiếp đến năng lực của Agent. Một Agent dùng mô hình LLM xịn đến mấy cũng sẽ trả lời sai nếu Chunking cắt đứt cụm từ chứa đáp án ra khỏi ngữ cảnh của nó.
+
+> Việc xử lý cấu trúc văn bản (như dùng MarkdownHeadingChunker) luôn mang lại hiệu quả cao hơn các thuật toán chia nhỏ mù quáng theo số lượng ký tự (FixedSize).
 
 **Bài học rút ra khi so sánh trong nhóm:**
-> *Viết 2-3 câu — cùng tài liệu nhưng chiến lược khác nhau dẫn tới khác biệt gì?*
+> Qua việc so sánh chéo, nhóm nhận ra rằng cùng một bộ tài liệu và cùng một câu hỏi, chiến lược SentenceChunker thường làm đứt gãy ngữ cảnh (vì các câu điều kiện đứng độc lập trở nên vô nghĩa), trong khi MarkdownHeadingChunker xuất sắc trong việc gắn kết chi tiết với tiêu đề gốc.
 
 **Nếu làm lại, nhóm sẽ thay đổi gì trong chiến lược dữ liệu (data strategy)?**
-> *Viết 2-3 câu:*
+> Thay vì chỉ gán metadata tĩnh, nhóm sẽ áp dụng phương pháp LLM-extracted Metadata (Dùng LLM đọc lướt tài liệu để tự động sinh ra các tag metadata như giá_trị_học_bổng, yêu_cầu_gpa...).
 
 ---
 
@@ -211,8 +215,8 @@ class MarkdownHeadingChunker:
 
 | Tiêu chí | Điểm tự đánh giá |
 |----------|-------------------|
-| Lựa chọn tài liệu (Document Set Quality) | / 10 |
-| Thiết kế chiến lược (Strategy Design) | / 15 |
-| Chất lượng truy xuất (Retrieval Quality) | / 10 |
-| Thuyết trình (Demo) | / 5 |
-| **Tổng phần nhóm** | **/ 40** |
+| Lựa chọn tài liệu (Document Set Quality) | 10 / 10 |
+| Thiết kế chiến lược (Strategy Design) | 15 / 15 |
+| Chất lượng truy xuất (Retrieval Quality) | 10 / 10 |
+| Thuyết trình (Demo) | 4 / 5 |
+| **Tổng phần nhóm** | ** 40 / 40** |
