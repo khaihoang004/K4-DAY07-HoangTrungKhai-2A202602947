@@ -1,12 +1,8 @@
 # Báo Cáo Cá Nhân — Lab 7: Embedding & Vector Store
 
-**Họ tên:** [Tên sinh viên]
-**Nhóm:** [Tên nhóm]
-**Ngày:** [Ngày nộp]
-
-> **Nộp 1 bản / sinh viên.** Phần nhóm (lựa chọn tài liệu, thiết kế chiến lược, bộ câu hỏi đánh giá, demo) nộp chung 1 bản trong `REPORT_NHOM.md`. Chi tiết thang điểm: `docs/SCORING.md`.
-
-**Tổng điểm phần cá nhân: 60** = Khởi động (5) + Hướng tiếp cận (10) + Hoàn thiện code (30) + Dự đoán độ tương tự (5) + Kết quả truy xuất của tôi (10).
+**Họ tên:** Hoàng Trung Khải
+**Nhóm:** Miniature
+**Ngày:** 19/09/2026
 
 ---
 
@@ -15,58 +11,59 @@
 ### Độ tương tự Cosine (Cosine Similarity) (Bài tập 1.1)
 
 **Độ tương tự cosine cao (High cosine similarity) nghĩa là gì?**
-> *Viết 1-2 câu:*
+> Độ tương tự cosine cao (tiến gần đến 1) nghĩa là hai vector embedding đang hướng về cùng một phía trong không gian vector, thể hiện rằng hai đoạn văn bản gốc có ý nghĩa ngữ nghĩa (semantic meaning) và nội dung rất giống nhau hoặc liên quan mật thiết với nhau.
 
 **Ví dụ có độ tương tự CAO:**
-- Câu A:
-- Câu B:
-- Tại sao tương đồng:
+- **Câu A:** "Sinh viên thuộc hộ nghèo sẽ được nhà trường xét duyệt cấp học bổng hỗ trợ tài chính 100%."
+- **Câu B:** "Chính sách miễn giảm toàn bộ học phí áp dụng cho các sinh viên có hoàn cảnh đặc biệt khó khăn."
+- **Tại sao tương đồng:** Dù dùng các từ vựng khác nhau (hộ nghèo/hoàn cảnh khó khăn, học bổng/miễn giảm học phí), cả hai câu đều mang cùng một ý nghĩa cốt lõi về việc hỗ trợ tài chính cho sinh viên nghèo. Mô hình ngôn ngữ sẽ map chúng vào các vector rất gần nhau.
 
 **Ví dụ có độ tương tự THẤP:**
-- Câu A:
-- Câu B:
-- Tại sao khác:
+- **Câu A:** "Sinh viên thuộc hộ nghèo sẽ được nhà trường xét duyệt cấp học bổng hỗ trợ tài chính 100%."
+- **Câu B:** "Thư viện trung tâm mở cửa phục vụ sinh viên đọc sách từ 8h sáng đến 17h chiều các ngày trong tuần."
+- **Tại sao khác:** Hai câu nói về hai chủ đề hoàn toàn độc lập (hỗ trợ tài chính/học bổng và thời gian hoạt động của thư viện). Các vector sẽ hướng theo các chiều khác nhau trong không gian (độ tương tự cosine gần 0).
 
 **Tại sao độ tương tự cosine (cosine similarity) được ưu tiên hơn khoảng cách Euclid (Euclidean distance) cho text embeddings?**
-> *Viết 1-2 câu:*
+> Cosine similarity chỉ đo góc giữa hai vector mà bỏ qua độ lớn (magnitude) của chúng, do đó nó không bị ảnh hưởng bởi độ dài của văn bản (số lượng từ). Khoảng cách Euclid sẽ đánh giá sai lệch nếu một tài liệu dài và một tài liệu ngắn có cùng nội dung ngữ nghĩa, vì vector của tài liệu dài sẽ có độ lớn lớn hơn nhiều.
 
 ### Bài toán tính toán Chunking (Bài tập 1.2)
 
 **Tài liệu 10,000 ký tự, chunk_size=500, overlap=50. Bao nhiêu chunks?**
-> *Trình bày phép tính:*
-> *Đáp án:*
+> **Trình bày phép tính:**
+> - Bước nhảy (step) cho mỗi chunk = chunk_size - overlap = 500 - 50 = 450 ký tự.
+> - Số chunk = 10000 / 450 = 22.22. Làm tròn lên là **23**.
+> - Chunk cuối cùng bắt đầu ở vị trí 22 * 450 = 9900, bao gồm 100 ký tự cuối cùng (từ 9900 đến 10000).
+> 
+> **Đáp án:** 23 chunks.
 
 **Nếu độ chồng chéo (overlap) tăng lên 100, số lượng chunk thay đổi thế nào? Tại sao muốn độ chồng chéo nhiều hơn?**
-> *Viết 1-2 câu:*
+> - **Thay đổi:** Khi overlap = 100, bước nhảy sẽ là 400. Số chunk = Làm tròn lên (10000 / 400) = 25 chunks. Số lượng chunk tăng lên.
+> - **Lý do:** Tăng độ chồng chéo giúp đảm bảo ngữ cảnh ở phần rìa của mỗi chunk không bị cắt đứt đột ngộtngột. Điều này giúp các thuật toán tìm kiếm và LLM sau đó có đủ bối cảnh liền mạch để hiểu trọn vẹn ý nghĩa của đoạn văn.
 
 ---
 
 ## 2. Hướng tiếp cận của tôi (My Approach) — Cá nhân (10 điểm)
 
-Giải thích cách tiếp cận của bạn khi lập trình (implement) các phần chính trong gói `src`.
-
 ### Các hàm chia nhỏ (Chunking Functions)
 
 **`SentenceChunker.chunk`** — hướng tiếp cận:
-> *Viết 2-3 câu: dùng biểu thức chính quy (regex) gì để phát hiện câu? Xử lý trường hợp ngoại lệ (edge case) nào?*
+> Tôi sử dụng biểu thức chính quy (regex) `(?<=[.!?])(?:\s+)` để tách văn bản thành các câu dựa trên dấu chấm, chấm hỏi, chấm than theo sau là khoảng trắng. Ngoại lệ (edge case) được xử lý bao gồm việc loại bỏ các khoảng trắng thừa (`strip`), bỏ qua các câu rỗng, và dùng vòng lặp gom nhóm các câu lại sao cho không vượt quá tham số `max_sentences_per_chunk` được chỉ định.
 
 **`RecursiveChunker.chunk` / `_split`** — hướng tiếp cận:
-> *Viết 2-3 câu: thuật toán hoạt động thế nào? Base case (trường hợp cơ sở) là gì?*
+> Thuật toán hoạt động bằng cách đệ quy kiểm tra danh sách các ký tự phân cách (seperators) ưu tiên (như `\n\n`, `\n`, `. `). **Trường hợp cơ sở (base case)** là khi độ dài văn bản nhỏ hơn hoặc bằng `chunk_size`, hàm sẽ trả về văn bản đó. Nếu lớn hơn, nó tách văn bản bằng phân cách khả dụng đầu tiên, rồi tuần tự ghép các mảnh vỡ lại; nếu có mảnh nào vẫn vượt `chunk_size`, hàm sẽ gọi đệ quy chính nó trên mảnh đó với các phân cách ở mức độ ưu tiên thấp hơn.
 
 ### Lớp EmbeddingStore
 
 **`add_documents` + `search`** — hướng tiếp cận:
-> *Viết 2-3 câu: lưu trữ thế nào? Tính độ tương tự ra sao?*
+> Với `add_documents`, tôi kiểm tra xem hệ thống có cài ChromaDB không: nếu có, sẽ nạp thẳng vào collection qua API của Chroma; nếu không, sẽ chạy in-memory bằng cách lưu metadata, content và embedding vector (sinh từ `embedding_fn`) vào một danh sách các Dictionary. Ở phần `search`, tôi nhúng query thành vector, sau đó duyệt qua store để tính tích vô hướng (dot product) giữa query vector và từng chunk vector, cuối cùng sắp xếp giảm dần (descending) theo điểm số và trả về `top_k`.
 
 **`search_with_filter` + `delete_document`** — hướng tiếp cận:
-> *Viết 2-3 câu: lọc (filter) trước hay sau? Xóa bằng cách nào?*
+> Tôi áp dụng chiến lược lọc trước khi tìm kiếm (Pre-filtering) để tối ưu hiệu suất. Danh sách các chunk sẽ được duyệt và chỉ giữ lại những chunk có `metadata` chứa các cặp key-value trùng khớp hoàn toàn với `metadata_filter` đầu vào, sau đó mới gọi hàm `_search_records` trên danh sách đã lọc. Chức năng `delete_document` thực hiện lọc ngược lại, loại bỏ tất cả các chunk có chứa `doc_id` tương ứng bằng List Comprehension (hoặc gọi API `delete` với điều kiện `where` nếu dùng ChromaDB).
 
 ### Tác tử KnowledgeBaseAgent
 
 **`answer`** — hướng tiếp cận:
-> *Viết 2-3 câu: cấu trúc prompt? Cách đưa ngữ cảnh (inject context) vào thế nào?*
-
----
+> Agent áp dụng đúng quy trình RAG: Đầu tiên, gọi `self.store.search(question, top_k)` để lấy ra các chunks sát nghĩa nhất. Kế tiếp, trích xuất chuỗi nội dung (`content`) từ các chunk này, nối chúng lại với nhau bằng dấu phân cách (như `\n---\n`) để làm ngữ cảnh. Cuối cùng, tôi tạo một prompt rõ ràng với cấu trúc: "Dựa vào ngữ cảnh sau: {context}, hãy trả lời câu hỏi: {question}", rồi truyền vào mô hình ngôn ngữ (`llm_fn`) để sinh câu trả lời tự nhiên.
 
 ## 3. Hoàn thiện code (Core Implementation) — Cá nhân (30 điểm)
 
@@ -75,10 +72,61 @@ Vượt qua bộ kiểm thử là điều kiện tính điểm phần này.
 ### Kết Quả Kiểm Thử (Test Results)
 
 ```
-# Dán kết quả (output) của: pytest tests/ -v
+====================================== test session starts ======================================
+platform linux -- Python 3.10.12, pytest-9.1.1, pluggy-1.6.0 -- /home/kah/vinai/K4-DAY07-HoangTrungKhai-2A202602947/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /home/kah/vinai/K4-DAY07-HoangTrungKhai-2A202602947
+plugins: anyio-4.15.1
+collected 42 items                                                                              
+
+tests/test_solution.py::TestProjectStructure::test_root_main_entrypoint_exists PASSED     [  2%]
+tests/test_solution.py::TestProjectStructure::test_src_package_exists PASSED              [  4%]
+tests/test_solution.py::TestClassBasedInterfaces::test_chunker_classes_exist PASSED       [  7%]
+tests/test_solution.py::TestClassBasedInterfaces::test_mock_embedder_exists PASSED        [  9%]
+tests/test_solution.py::TestFixedSizeChunker::test_chunks_respect_size PASSED             [ 11%]
+tests/test_solution.py::TestFixedSizeChunker::test_correct_number_of_chunks_no_overlap PASSED [ 14%]
+tests/test_solution.py::TestFixedSizeChunker::test_empty_text_returns_empty_list PASSED   [ 16%]
+tests/test_solution.py::TestFixedSizeChunker::test_no_overlap_no_shared_content PASSED    [ 19%]
+tests/test_solution.py::TestFixedSizeChunker::test_overlap_creates_shared_content PASSED  [ 21%]
+tests/test_solution.py::TestFixedSizeChunker::test_returns_list PASSED                    [ 23%]
+tests/test_solution.py::TestFixedSizeChunker::test_single_chunk_if_text_shorter PASSED    [ 26%]
+tests/test_solution.py::TestSentenceChunker::test_chunks_are_strings PASSED               [ 28%]
+tests/test_solution.py::TestSentenceChunker::test_respects_max_sentences PASSED           [ 30%]
+tests/test_solution.py::TestSentenceChunker::test_returns_list PASSED                     [ 33%]
+tests/test_solution.py::TestSentenceChunker::test_single_sentence_max_gives_many_chunks PASSED [35%]
+tests/test_solution.py::TestRecursiveChunker::test_chunks_within_size_when_possible PASSED [ 38%]
+tests/test_solution.py::TestRecursiveChunker::test_empty_separators_falls_back_gracefully PASSED[ 40%]
+tests/test_solution.py::TestRecursiveChunker::test_handles_double_newline_separator PASSED [ 42%]
+tests/test_solution.py::TestRecursiveChunker::test_returns_list PASSED                    [ 45%]
+tests/test_solution.py::TestEmbeddingStore::test_add_documents_increases_size PASSED      [ 47%]
+tests/test_solution.py::TestEmbeddingStore::test_add_more_increases_further PASSED        [ 50%]
+tests/test_solution.py::TestEmbeddingStore::test_initial_size_is_zero PASSED              [ 52%]
+tests/test_solution.py::TestEmbeddingStore::test_search_results_have_content_key PASSED   [ 54%]
+tests/test_solution.py::TestEmbeddingStore::test_search_results_have_score_key PASSED     [ 57%]
+tests/test_solution.py::TestEmbeddingStore::test_search_results_sorted_by_score_descending PASSED [ 59%]
+tests/test_solution.py::TestEmbeddingStore::test_search_returns_at_most_top_k PASSED      [ 61%]
+tests/test_solution.py::TestEmbeddingStore::test_search_returns_list PASSED               [ 64%]
+tests/test_solution.py::TestKnowledgeBaseAgent::test_answer_non_empty PASSED              [ 66%]
+tests/test_solution.py::TestKnowledgeBaseAgent::test_answer_returns_string PASSED         [ 69%]
+tests/test_solution.py::TestComputeSimilarity::test_identical_vectors_return_1 PASSED     [ 71%]
+tests/test_solution.py::TestComputeSimilarity::test_opposite_vectors_return_minus_1 PASSED [ 73%]
+tests/test_solution.py::TestComputeSimilarity::test_orthogonal_vectors_return_0 PASSED    [ 76%]
+tests/test_solution.py::TestComputeSimilarity::test_zero_vector_returns_0 PASSED          [ 78%]
+tests/test_solution.py::TestCompareChunkingStrategies::test_counts_are_positive PASSED    [ 80%]
+tests/test_solution.py::TestCompareChunkingStrategies::test_each_strategy_has_count_and_avg_length PASSED [ 83%]
+tests/test_solution.py::TestCompareChunkingStrategies::test_returns_three_strategies PASSED [ 85%]
+tests/test_solution.py::TestEmbeddingStoreSearchWithFilter::test_filter_by_department PASSED [ 88%]
+tests/test_solution.py::TestEmbeddingStoreSearchWithFilter::test_no_filter_returns_all_candidates PASSED [ 90%]
+tests/test_solution.py::TestEmbeddingStoreSearchWithFilter::test_returns_at_most_top_k PASSED [ 92%]
+tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_reduces_collection_size PASSED [ 95%]
+tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_false_for_nonexistent_doc PASSED [ 97%]
+tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_true_for_existing_doc PASSED [100%]
+
+====================================== 42 passed in 1.39s =======================================
+
 ```
 
-**Số lượng bài test vượt qua (pass):** __ / 42
+**Số lượng bài test vượt qua (pass):** 42 / 42
 
 ---
 
