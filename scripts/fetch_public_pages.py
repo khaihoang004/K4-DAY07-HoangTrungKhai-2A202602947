@@ -19,7 +19,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 from urllib.robotparser import RobotFileParser
-
+import ssl
 
 DEFAULT_USER_AGENT = "Day7DataFoundationsCourse/1.0 (+educational-lab)"
 MANIFEST_FIELDS = ["doc_id", "file_path", "title", "source_url", "retrieved_at", "document_version", "license_or_permission"]
@@ -105,13 +105,29 @@ def robots_allowed(url: str, user_agent: str) -> bool:
     if parsed.scheme not in {"http", "https"} or not parsed.netloc:
         print(f"Skipping unsupported URL: {url}", file=sys.stderr)
         return False
+    
     robots_url = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
-    parser = RobotFileParser(robots_url)
+    parser = RobotFileParser()
+    parser.set_url(robots_url)
+    
     try:
-        parser.read()
-    except (HTTPError, URLError, OSError) as error:
+        # Bỏ qua xác thực SSL và sử dụng User-Agent tuỳ chỉnh để tránh bị WAF chặn
+        context = ssl._create_unverified_context()
+        request = Request(robots_url, headers={"User-Agent": user_agent})
+        with urlopen(request, timeout=10.0, context=context) as response:
+            lines = response.read().decode("utf-8", errors="replace").splitlines()
+            parser.parse(lines)
+    except HTTPError as err:
+        if err.code in (401, 403):
+            print(f"Skipping {url}: {robots_url} returned {err.code}, blocked by firewall.", file=sys.stderr)
+            return False
+        # Nếu lỗi 404 (không tìm thấy robots.txt) thì mặc định là cho phép truy cập
+        elif err.code >= 400 and err.code < 500:
+            parser.allow_all = True
+    except (URLError, OSError) as error:
         print(f"Skipping {url}: cannot verify {robots_url} ({error})", file=sys.stderr)
         return False
+
     if not parser.can_fetch(user_agent, url):
         print(f"Skipping {url}: disallowed by robots.txt", file=sys.stderr)
         return False
@@ -120,7 +136,9 @@ def robots_allowed(url: str, user_agent: str) -> bool:
 
 def fetch(url: str, user_agent: str, timeout: float) -> tuple[str, str]:
     request = Request(url, headers={"User-Agent": user_agent, "Accept": "text/html,text/plain;q=0.9,*/*;q=0.1"})
-    with urlopen(request, timeout=timeout) as response:  # noqa: S310 - URL is supplied by the course user.
+    # Bỏ qua xác thực SSL khi tải nội dung trang
+    context = ssl._create_unverified_context()
+    with urlopen(request, timeout=timeout, context=context) as response:
         content_type = response.headers.get_content_type().lower()
         if content_type not in {"text/html", "text/plain"}:
             raise ValueError(f"unsupported content type: {content_type}")

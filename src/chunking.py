@@ -185,3 +185,68 @@ class ChunkingStrategyComparator:
             }
 
         return comparison_results
+
+class MarkdownHeadingChunker:
+    """
+    Chiến lược chia nhỏ dựa trên thẻ Heading của Markdown.
+    Giúp duy trì ngữ cảnh bằng cách gắn lại tiêu đề (Heading gần nhất) 
+    vào các chunk con nếu nội dung bên dưới Heading đó quá dài.
+    """
+    def __init__(self, chunk_size: int = 300):
+        self.chunk_size = chunk_size
+
+    def chunk(self, text: str) -> list[str]:
+        chunks = []
+        # Tách văn bản tại các dòng bắt đầu bằng dấu # (Heading)
+        parts = re.split(r'(^#+\s+.*$)', text, flags=re.MULTILINE)
+        
+        current_heading = ""
+        current_block = ""
+        
+        for part in parts:
+            if re.match(r'^#+\s+', part):
+                # Khi gặp Heading mới, xử lý block cũ trước
+                if current_block.strip():
+                    chunks.extend(self._split_large_block(current_block, current_heading))
+                # Cập nhật heading mới
+                current_heading = part.strip()
+                current_block = current_heading + "\n"
+            else:
+                current_block += part
+                
+        # Xử lý block cuối cùng
+        if current_block.strip():
+            chunks.extend(self._split_large_block(current_block, current_heading))
+            
+        return [c for c in chunks if c.strip()]
+
+    def _split_large_block(self, text: str, current_heading: str) -> list[str]:
+        """Chia nhỏ một khối văn bản nếu nó vượt quá chunk_size, luôn đính kèm heading."""
+        if len(text) <= self.chunk_size:
+            return [text.strip()]
+            
+        sub_chunks = []
+        paragraphs = text.split('\n\n')
+        
+        # Khởi tạo chunk tạm thời với heading
+        temp_chunk = current_heading + "\n" if current_heading else ""
+        
+        for p in paragraphs:
+            p = p.strip()
+            if not p or p == current_heading:
+                continue
+                
+            # Nếu thêm đoạn mới vào vẫn an toàn
+            if len(temp_chunk) + len(p) < self.chunk_size:
+                temp_chunk += p + "\n\n"
+            else:
+                # Nếu chunk tạm đã có nội dung (khác với chỉ mỗi heading), lưu lại
+                if temp_chunk.strip() and temp_chunk.strip() != current_heading:
+                    sub_chunks.append(temp_chunk.strip())
+                # Bắt đầu chunk mới, nhồi lại heading vào đầu
+                temp_chunk = (current_heading + "\n" + p + "\n\n") if current_heading else (p + "\n\n")
+                
+        if temp_chunk.strip() and temp_chunk.strip() != current_heading:
+            sub_chunks.append(temp_chunk.strip())
+            
+        return sub_chunks

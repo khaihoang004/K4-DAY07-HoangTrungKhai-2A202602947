@@ -15,8 +15,7 @@ def parse_markdown_with_frontmatter(file_path: Path):
 
 def run_baseline_analysis():
     target_files = [
-        Path("data/hoc-bong/hb-cp-179-2026.md"),
-        Path("data/hoc-bong/hb-sdh-mienhp-2026.md")
+        Path("data/hoc-bong/vnu-ulis-cam-nang-hoc-bong.md")
     ]
     
     combined_text = ""
