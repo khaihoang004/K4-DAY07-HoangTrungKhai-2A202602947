@@ -171,11 +171,11 @@ class MarkdownHeadingChunker:
 
 | # | Câu hỏi (Query) | Câu trả lời chuẩn (Gold Answer) | Chunk nào chứa thông tin? |
 |---|-------|-------------------------------|--------------------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+| 1 | Mức hỗ trợ tài chính hàng tháng cao nhất dành cho sinh viên học tập tại các chương trình đào tạo tài năng theo Nghị định 179/2026/NĐ-CP tại Trường ĐHKHTN là bao nhiêu? | Mức hỗ trợ tài chính hàng tháng cao nhất là 5.500.000 đồng/tháng dành riêng cho sinh viên học tập tại các chương trình đào tạo tài năng (thuộc danh mục ưu tiên). | `vnu-hus-nghi-dinh-179.md` *(Yêu cầu `filter={"audience": "prospective-student"}`)* |
+| 2 | Sinh viên đang theo học tại Trường Quốc tế (VNU-IS) cần đáp ứng tiêu chuẩn chung nào về kết quả học tập và rèn luyện để được đăng ký các chương trình học bổng ngắn hạn? | Kết quả học tập đạt loại Giỏi trở lên (GPA $\ge 3.2$), điểm rèn luyện đạt loại Tốt trở lên ($\ge 80$ điểm), không bị kỷ luật từ mức khiển trách. | `vnu-is-hoc-bong-ngan-han.md` *(Yêu cầu `filter={"audience": "student"}`)* |
+| 3 | Điều kiện về điểm thi THPT để thí sinh nhận Học bổng Chính phủ theo Nghị định 179/2026/NĐ-CP tại Trường ĐHKHTN là gì? | Tổng điểm Toán và 2 môn tổ hợp đạt từ 22,50/30 trở lên (không tính điểm ưu tiên) và nằm trong top 30% điểm trúng tuyển cao nhất của nhóm ngành. | `vnu-hus-nghi-dinh-179.md` |
+| 4 | Trong Cẩm nang học bổng VNU-ULIS, Quỹ học bổng Thắp sáng niềm tin trao tặng bao nhiêu tiền cho mỗi suất học bổng dành cho sinh viên đại học? | Quỹ học bổng Thắp sáng niềm tin trao 12.000.000 VNĐ/học bổng cho mỗi sinh viên. | `vnu-ulis-cam-nang-hoc-bong.md` *(Yêu cầu `filter={"audience": "student"}`)* |
+| 5 | Trường Quốc tế (VNU-IS) phân loại hệ thống học bổng dành cho sinh viên thành những nhóm nguồn chính nào? | Gồm 3 nhóm chính: 1) Nguồn ngân sách nhà nước; 2) Tài trợ ngoài ngân sách (doanh nghiệp/tổ chức); 3) Hỗ trợ sinh viên có hoàn cảnh khó khăn. | `vnu-is-tong-quan-hoc-bong.md` *(Yêu cầu `filter={"category": "scholarship"}`)* |
 
 ### Tổng hợp chất lượng truy xuất của nhóm
 
@@ -183,14 +183,14 @@ class MarkdownHeadingChunker:
 
 | # | Câu hỏi | Chiến lược tốt nhất cho câu này | Có chunk liên quan trong top-3? | Ghi chú |
 |---|---------|-------------------------------|-------------------------------|---------|
-| 1 | | | | |
-| 2 | | | | |
-| 3 | | | | |
-| 4 | | | | |
-| 5 | | | | |
+| 1 | Mức hỗ trợ tài chính hàng tháng cao nhất dành cho sinh viên học tập tại các chương trình đào tạo tài năng theo Nghị định 179/2026/NĐ-CP tại Trường ĐHKHTN là bao nhiêu? | MarkdownHeading + Filter | Có (Top 1) - Score: 2 | Bắt buộc dùng filter `audience="prospective-student"` để hệ thống không lấy nhầm các mức hỗ trợ của sinh viên đang học. |
+| 2 | Sinh viên đang theo học tại Trường Quốc tế (VNU-IS) cần đáp ứng tiêu chuẩn chung nào về kết quả học tập và rèn luyện để được đăng ký các chương trình học bổng ngắn hạn? | RecursiveChunker | Có (Top 1) - Score: 2 | Các điều kiện (GPA, rèn luyện, kỷ luật) viết thành 1 đoạn dài. Recursive giữ trọn vẹn đoạn này tốt hơn SentenceChunker. |
+| 3 | Điều kiện về điểm thi THPT để thí sinh nhận Học bổng Chính phủ theo Nghị định 179/2026/NĐ-CP tại Trường ĐHKHTN là gì? | MarkdownHeading | Có (Top 2/3) - Score: 1 | Chiến lược giúp đính kèm trọn vẹn tiêu đề 'Nghị định 179' vào chi tiết điều kiện điểm THPT. |
+| 4 | Trong Cẩm nang học bổng VNU-ULIS, Quỹ học bổng Thắp sáng niềm tin trao tặng bao nhiêu tiền cho mỗi suất học bổng dành cho sinh viên đại học? | SentenceChunker + Filter | Có (Top 1) - Score: 2 | Trích xuất được đúng câu có số '12.000.000 VNĐ', nhưng dễ bị ngắt khỏi ngữ cảnh nếu không cẩn thận. |
+| 5 | Trường Quốc tế (VNU-IS) phân loại hệ thống học bổng dành cho sinh viên thành những nhóm nguồn chính nào? | MarkdownHeading | Có (Top 1) - Score: 2 | Gom trọn vẹn được danh sách 3 nhóm liệt kê dưới thẻ tiêu đề `## Hệ thống học bổng`. |
 
 **Lọc bằng metadata có giúp ích không? Ở câu hỏi nào?**
-> *Viết 2-3 câu:*
+> Có, lọc bằng metadata đặc biệt phát huy tác dụng ở **Câu 1** và **Câu 4**. Nhờ giới hạn từ khóa `audience="prospective-student"` (thí sinh tuyển sinh) hay `audience="student"` (sinh viên đang học), hệ thống RAG thu hẹp được phạm vi tìm kiếm, tránh việc Cosine Similarity lấy nhầm chính sách hỗ trợ tài chính của nhóm đối tượng khác, từ đó giúp Agent trả lời chính xác số tiền và điều kiện mà không bị "ảo giác" (hallucinate).
 
 ---
 
@@ -217,6 +217,6 @@ class MarkdownHeadingChunker:
 |----------|-------------------|
 | Lựa chọn tài liệu (Document Set Quality) | 10 / 10 |
 | Thiết kế chiến lược (Strategy Design) | 15 / 15 |
-| Chất lượng truy xuất (Retrieval Quality) | 10 / 10 |
-| Thuyết trình (Demo) | 4 / 5 |
-| **Tổng phần nhóm** | ** 40 / 40** |
+| Chất lượng truy xuất (Retrieval Quality) | 9 / 10 |
+| Thuyết trình (Demo) | 5 / 5 |
+| **Tổng phần nhóm** | ** 39 / 40** |
