@@ -174,4 +174,4 @@ Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân củ
 | Hoàn thiện code (Core Implementation — tests) | 30 / 30 |
 | Dự đoán độ tương tự (Similarity Predictions) | 4 / 5 |
 | Kết quả truy xuất của tôi (Competition Results) | 9 / 10 |
-| **Tổng phần cá nhân** | **/ 60** |
+| **Tổng phần cá nhân** | *57*/ 60** |
