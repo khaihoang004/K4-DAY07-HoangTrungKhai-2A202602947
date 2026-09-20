@@ -23,16 +23,11 @@
 
 | #   | Tên tài liệu | Nguồn (Source URL) | Ngày lấy / Phiên bản | Số ký tự | Metadata đã gán |
 | --- | ------------ | ------------------ | -------------------- | -------- | --------------- |
-| 1   | Chi tiết 55 chương trình đào tạo nhận Học bổng Chính phủ theo Nghị định 179 | https://hust.edu.vn/vi/news/tin-tuc-su-kien/chi-tiet-55-chuong-trinh-dao-tao-tai-bach-khoa-ha-noi-nhan-hoc-bong-chinh-phu-theo-nghi-dinh-179-655959.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=undergraduate-student, category=Học bổng Chính phủ (Nghị định 179), language=vi |
-| 2   | Học Kỹ thuật - Công nghệ tại Bách khoa Hà Nội với Học bổng Chính phủ 2026 | https://hust.edu.vn/vi/news/tin-tuc-su-kien/hoc-ky-thuat-cong-nghe-tai-bach-khoa-ha-noi-vung-tai-chinh-voi-hoc-bong-chinh-phu-2026-655930.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=undergraduate-student, category=Học bổng Chính phủ (Nghị định 179), language=vi |
-| 3   | Bách khoa Hà Nội miễn học phí cho tất cả NCS trúng tuyển từ 2026 | https://hust.edu.vn/vi/news/tuyen-sinh-dao-tao-cong-tac-sinh-vien/bach-khoa-ha-noi-trao-4-ty-dong-hoc-bong-sau-dai-hoc-mien-hoc-phi-cho-tat-ca-ncs-trung-tuyen-tu-2026-655834.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=graduate-student, category=Học bổng sau đại học / Miễn học phí NCS, language=vi |
-| 4   | Đại học Bách khoa Hà Nội “bao trọn” học phí cho NCS từ 2026 | https://hust.edu.vn/vi/news/tuyen-sinh-dao-tao-cong-tac-sinh-vien/dai-hoc-bach-khoa-ha-noi-phat-trien-nguon-luc-nghien-cuu-bao-tron-hoc-phi-cho-ncs-655842.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=graduate-student, category=Học bổng sau đại học / Miễn học phí NCS, language=vi |
-| 5   | Danh sách học viên và nghiên cứu sinh nhận học bổng Sau đại học năm 2025 | https://sdh.hust.edu.vn/Default.aspx?scid=23&CategoryID=111&nid=3511 | 2026-09-19 / 2025 | Chưa đo (sau làm sạch) | audience=graduate-student, category=Danh sách học bổng sau đại học, language=vi |
-| 6   | Thông báo Học bổng Sau đại học Hội khuyến học Thương gia Đài Loan năm 2026 | https://sdh.hust.edu.vn/Default.aspx?scid=23&CategoryID=111&nid=3554 | 2026-09-19 / 2026 | Chưa đo (sau làm sạch) | audience=graduate-student, category=Học bổng đối tác (Đài Loan), language=vi |
-| 7   | Quy định mới về xét và cấp học bổng trao đổi nước ngoài | https://scls.hust.edu.vn/vi/news/dao-tao-cong-tac-sinh-vien/dai-hoc-bach-khoa-ha-noi-ban-hanh-quy-dinh-moi-ve-xet-va-cap-hoc-bong-trao-doi-nuoc-ngoai-578.html | 2026-09-19 / 2025-11 | Chưa đo (sau làm sạch) | audience=undergraduate-student, category=Học bổng trao đổi nước ngoài, language=vi |
-| 8   | Bách khoa Hà Nội và doanh nghiệp tài trợ hơn 3 tỷ đồng học bổng năm 2025 | https://hust.edu.vn/vi/news/hoat-dong-chung/bach-khoa-ha-noi-va-doanh-nghiep-hop-tac-tai-tro-hon-3-ty-dong-hoc-bong-nam-2025-655389.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=undergraduate-student, category=Học bổng doanh nghiệp (Chắp cánh Foundation), language=vi |
-| 9   | 39 sinh viên vượt khó học giỏi nhận học bổng trị giá hơn 700 triệu đồng | https://hust.edu.vn/vi/news/hoat-dong-chung/39-sinh-vien-vuot-kho-hoc-gioi-nhan-hoc-bong-tri-gia-hon-700-trieu-dong-655646.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=undergraduate-student, category=Học bổng doanh nghiệp (Chắp cánh Bách khoa), language=vi |
-| 10  | Học bổng Chắp cánh Bách khoa tiếp sức tân sinh viên K70 | https://hust.edu.vn/vi/news/hoat-dong-chung/hoc-bong-chap-canh-bach-khoa-tiep-suc-tan-sinh-vien-k70-655558.html | 2026-09-19 / not-stated | Chưa đo (sau làm sạch) | audience=undergraduate-student, category=Học bổng doanh nghiệp (Chắp cánh Bách khoa), language=vi |
+| 1   | Cơ hội nhận học bổng Chính phủ theo Nghị định 179 tại Trường ĐHKHTN | https://hus.vnu.edu.vn/tin-tuc-su-kien/dao-tao-tuyen-sinh/c…-dinh-179-tai-truong-dai-hoc-khoa-hoc-tu-nhien-dhqghn-145744 | 2026-09-19 / 2026 | 10,882 | doc_id=vnu-hus-nghi-dinh-179, audience=prospective-student, category=scholarship, language=vi |
+| 2   | Học bổng ngắn hạn - Trường Quốc tế - ĐHQGHN | https://www.is.vnu.edu.vn/doi-song-sinh-vien/hoc-bong-ngan-han/ | 2026-09-19 / not-stated | 6,535 | doc_id=vnu-is-hoc-bong-ngan-han, audience=student, category=scholarship, language=vi |
+| 3   | Học bổng dự kiến năm 2026 - Trường Quốc tế - ĐHQGHN | https://www.is.vnu.edu.vn/tuyen-sinh/hoc-bong/ | 2026-09-19 / 2026 | 13,989 | doc_id=vnu-is-hoc-bong-tuyen-sinh, audience=prospective-student, category=scholarship, language=vi |
+| 4   | Tổng quan hệ thống học bổng - Trường Quốc tế - ĐHQGHN | https://www.is.vnu.edu.vn/doi-song-sinh-vien/tong-quan-he-thong-hoc-bong/ | 2026-09-19 / not-stated | 7,063 | doc_id=vnu-is-tong-quan-hoc-bong, audience=student, category=scholarship, language=vi |
+| 5   | Cẩm nang Học bổng cho học sinh sinh viên Trường ĐH Ngoại ngữ | https://ulis.vnu.edu.vn/cam-nang-hoc-bong-cho-hoc-sinh-sinh-vien-hoc-vien-cua-truong-dai-hoc-ngoai-ngu/ | 2026-09-19 / not-stated | 16,606 | doc_id=vnu-ulis-cam-nang-hoc-bong, audience=student, category=scholarship, language=vi |
 
 **Danh sách kiểm tra quản trị dữ liệu (Data governance checklist):**
 - [x] Tập tài liệu (Corpus) chỉ chứa nguồn công khai/được phép dùng và không chứa dữ liệu cá nhân, thông tin đăng nhập hoặc tài liệu nội bộ.
@@ -42,16 +37,16 @@
 
 | Trường metadata       | Kiểu     | Ví dụ giá trị                                      | Tại sao hữu ích cho truy xuất (retrieval)? |
 | --------------------- | -------- | -------------------------------------------------- | ------------------------------------------ |
-| url / source_url      | string   | https://hust.edu.vn/...                            | Truy xuất nguồn gốc, kiểm chứng thông tin  |
+| url / source_url      | string   | https://hus.vnu.edu.vn/...                         | Truy xuất nguồn gốc, kiểm chứng thông tin  |
 | retrieved_at          | date     | 2026-09-19                                         | Biết độ mới của dữ liệu                    |
-| doc_id                | string   | HB-CP-179-2026                                     | Định danh duy nhất, dễ quản lý & cập nhật  |
-| title                 | string   | Chi tiết 55 chương trình...                        | Hiển thị kết quả, hỗ trợ keyword search    |
-| audience              | string   | undergraduate-student / graduate-student           | Lọc chính xác theo đối tượng (sinh viên / NCS) |
-| department            | string   | Ban Đào tạo - Bộ phận Sau đại học                  | Lọc theo đơn vị ban hành                   |
-| category              | string   | Học bổng Chính phủ (Nghị định 179)                 | Lọc theo loại học bổng                     |
+| doc_id                | string   | vnu-hus-nghi-dinh-179                              | Định danh duy nhất, dễ quản lý & cập nhật  |
+| title                 | string   | Cơ hội nhận học bổng Chính phủ...                  | Hiển thị kết quả, hỗ trợ keyword search    |
+| audience              | string   | student / prospective-student                      | Lọc chính xác theo đối tượng (sinh viên / tân sinh viên) |
+| department            | string   | admissions / student-affairs                       | Lọc theo đơn vị ban hành                   |
+| category              | string   | scholarship                                        | Lọc theo loại học bổng                     |
 | language              | string   | vi                                                 | Đảm bảo ngôn ngữ phù hợp                   |
-| document_version      | string   | 2025 / 2026 / not-stated                           | Ưu tiên tài liệu mới / đúng phiên bản      |
-| license_or_permission | string   | Công khai (website chính thức HUST)                | Xác nhận quyền sử dụng hợp pháp            |
+| document_version      | string   | 2026 / not-stated                                  | Ưu tiên tài liệu mới / đúng phiên bản      |
+| license_or_permission | string   | public-source                                      | Xác nhận quyền sử dụng hợp pháp            |
 
 ---
 
