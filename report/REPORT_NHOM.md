@@ -17,7 +17,7 @@
 
 ### Chủ đề (Domain) & Lý Do Chọn
 
-**Chủ đề:** Học bổng của Đại học Bách khoa Hà Nội.
+**Chủ đề:** Học bổng của Đại học Quốc gia Hà Nội.
 
 **Tại sao nhóm chọn chủ đề này?**
 > Đây là thông tin quan trọng, cập nhật và có nhu cầu tra cứu cao từ sinh viên, học viên cao học và nghiên cứu sinh. Tất cả nguồn đều là trang chính thức của trường (hust.edu.vn, sdh.hust.edu.vn, scls.hust.edu.vn), công khai, không chứa dữ liệu cá nhân. Chủ đề có cấu trúc rõ ràng (điều kiện, mức hỗ trợ, đối tượng, thời gian) nên phù hợp để xây dựng hệ thống RAG có khả năng lọc theo audience và category.
