@@ -1,8 +1,11 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
-**Nhóm:** [Tên nhóm]
-**Thành viên:** [Họ tên từng thành viên]
-**Ngày:** [Ngày nộp]
+**Nhóm:** Miniature
+**Thành viên:** 
+- Hoàng Trung Khải - 2A202602947
+- Nguyễn Minh Dương - 2A202602920
+- Nguyễn Thu Trang - 2A202602435
+**Ngày:** 19/09/2026
 
 > **Nộp 1 bản / nhóm.** Phần cá nhân (hướng tiếp cận, kết quả riêng, dự đoán…) mỗi thành viên nộp riêng trong `REPORT_CANHAN.md`. Chi tiết thang điểm: `docs/SCORING.md`.
 
