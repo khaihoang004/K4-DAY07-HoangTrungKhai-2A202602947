@@ -149,21 +149,20 @@ tests/test_solution.py::TestEmbeddingStoreDeleteDocument::test_delete_returns_tr
 
 ## 5. Kết quả truy xuất của tôi (Competition Results) — Cá nhân (10 điểm)
 
-Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân của bạn trong gói `src`. **5 câu hỏi này phải trùng với các thành viên cùng nhóm** (xem `REPORT_NHOM.md`).
+Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân của bạn trong gói `src`. (Áp dụng chiến lược `MarkdownHeadingChunker` và có gán `metadata_filter`).
 
 | # | Câu hỏi (Query) | Top-1 Chunk truy xuất được (tóm tắt) | Điểm Score | Có liên quan không? (Relevant) | Câu trả lời của Agent (tóm tắt) |
 |---|-------|--------------------------------|-------|-----------|------------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | Mức hỗ trợ tài chính hàng tháng cao nhất dành cho chương trình tài năng theo NĐ 179 tại ĐHKHTN là bao nhiêu? | `## Mức hỗ trợ tài chính`... Mức hỗ trợ tài chính hàng tháng cao nhất là 5.500.000 đồng/tháng dành riêng cho sinh viên... | **2** | Có | Mức hỗ trợ tài chính hàng tháng cao nhất là 5.500.000 đồng/tháng. |
+| 2 | Sinh viên VNU-IS cần đáp ứng tiêu chuẩn chung nào để được đăng ký các học bổng ngắn hạn? | `## Tiêu chuẩn chung học bổng ngắn hạn`... GPA đạt loại Giỏi trở lên (>= 3.2), điểm rèn luyện loại Tốt... | **2** | Có | Cần có GPA đạt từ 3.2 trở lên (loại Giỏi), rèn luyện loại Tốt và không bị kỷ luật. |
+| 3 | Điều kiện về điểm thi THPT để nhận Học bổng NĐ 179/2026 tại ĐHKHTN là gì? | `## Điều kiện điểm thi THPT`... Tổng điểm môn Toán và 2 môn khác đạt từ 22,50/30 điểm trở lên... | **1** | Có | Yêu cầu tổng điểm Toán và 2 môn tổ hợp đạt từ 22,50/30 trở lên và lọt top 30% điểm cao nhất. |
+| 4 | Quỹ Thắp sáng niềm tin trong Cẩm nang VNU-ULIS trao tặng bao nhiêu tiền cho mỗi suất học bổng? | `## Quỹ học bổng Thắp sáng niềm tin`... Quỹ học bổng trao 12.000.000 VNĐ/học bổng cho mỗi sinh viên trúng tuyển... | **2** | Có | Quỹ trao tặng 12.000.000 VNĐ/học bổng cho mỗi sinh viên. |
+| 5 | VNU-IS phân loại hệ thống học bổng dành cho sinh viên thành những nhóm nguồn chính nào? | `## Hệ thống học bổng`... Hệ thống học bổng VNU-IS gồm 3 nhóm chính: 1) NSNN; 2) Tài trợ; 3) Khó khăn... | **2** | Có | Hệ thống gồm 3 nhóm: 1) Ngân sách nhà nước, 2) Tài trợ doanh nghiệp, 3) Hỗ trợ hoàn cảnh khó khăn. |
 
-**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** __ / 5
+**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** **5** / 5
 
 **Điều hay nhất tôi học được từ thành viên khác / nhóm khác (qua demo):**
-> *Viết 2-3 câu:*
-
+> Qua demo so sánh với bạn Dương (dùng `SentenceChunker`), tôi nhận ra điểm yếu chí mạng của chiến lược `MarkdownHeading` của mình: Nó chỉ thực sự tỏa sáng khi tài liệu gốc được viết chuẩn định dạng Markdown. Nếu đưa vào một văn bản thuần túy (như file `.txt` không có `#`), thuật toán của tôi sẽ bị biến thành một cục text khổng lồ và đánh mất hoàn toàn khả năng chia nhỏ, trong khi `SentenceChunker` hay `RecursiveChunker` của các bạn lại xử lý rất an toàn trường hợp này. Do đó, cần có cơ chế "fallback" (dự phòng) giữa các thuật toán.
 ---
 
 ## Tự Đánh Giá (Phần Cá Nhân)
@@ -174,5 +173,5 @@ Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân củ
 | Hướng tiếp cận của tôi (My Approach) | 9 / 10 |
 | Hoàn thiện code (Core Implementation — tests) | 30 / 30 |
 | Dự đoán độ tương tự (Similarity Predictions) | 4 / 5 |
-| Kết quả truy xuất của tôi (Competition Results) | / 10 |
+| Kết quả truy xuất của tôi (Competition Results) | 9 / 10 |
 | **Tổng phần cá nhân** | **/ 60** |
